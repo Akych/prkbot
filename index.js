@@ -8,14 +8,17 @@ const htmlimage = require("./modules/htmlimage.js")
 const xlsxparser = require("./modules/xlsxparser.js")
 const { vk } = require("./cfg.json")
 
-
 const fs = require("fs")
 const Queue = require("./modules/queue.js")
-
 
 if (!fs.existsSync(vk.schedule.hashfilepath)) {
     fs.writeFileSync(vk.schedule.hashfilepath,"") 
 }
+
+if (!fs.existsSync("./files")){
+    fs.mkdirSync("./files");
+}
+
 var hash = fs.readFileSync(vk.schedule.hashfilepath,{ encoding: 'utf8', flag: 'r' });
 
 const tasklist = new Queue()
