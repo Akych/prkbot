@@ -1,0 +1,17 @@
+{
+    "dynamicTimeTable" : false,
+    
+    "vk" : {
+        "requestdelay" : 10,
+        "userAgent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36",
+        "validuserids" : {
+            "6222960" : true,
+            "51251854" : true
+        },
+        "schedule" : {
+            "url" : "https://vk.com/topic-1014995_49418124",
+            "savefilepathandname" : "./files/schedule.xlsx",
+            "hashfilepath" : "./files/hash.txt"
+        }
+    }
+}
