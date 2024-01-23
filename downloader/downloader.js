@@ -21,10 +21,8 @@ const getOffset = async ()=>{
 }
 
 const getScheduleLink = async ()=>{
-  
   var offset = await getOffset()
   offset = Math.max(Number(offset) - 19,0)
-
   return new Promise(async (resolve,reject) => {
     let resolvelink = ""
     await axios.get(vk.schedule.url+"?offset="+offset, axiosConfig).then(async response => {
@@ -70,19 +68,15 @@ const downloadFile = async (url) => {
   });
 }
 
-
 module.exports.getScheduleLink = getScheduleLink
-
 module.exports.run = async () =>{
   return new Promise(async (resolve, reject) => {
     const link = await getScheduleLink()
     if (!link){ console.error(`No Link`); return}
-    console.log("get schedule from: ",link)
-
-
+    console.log("Скачиваем расписание: ",link)
     const filepath = await downloadFile(link) 
     if (fs.existsSync(filepath)) {
-      console.log("save to: ",filepath)
+      console.log("Сохраняем: ",filepath)
       resolve(filepath)//kek2
     } else {
       console.error(`Error download filed ${filepath}`);

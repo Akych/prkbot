@@ -363,12 +363,4 @@ def xlsx2html(
         ws, locale=locale, fs=fs, default_cell_border=default_cell_border
     )
     html = render_data_to_html(data, append_headers, append_lineno)
-
-    if not output:
-        output = io.StringIO()
-    if isinstance(output, str):
-        output = open(output, "w", encoding="utf-8")
-    output.write(html)
-    output.flush()
-    print("ok")
-    return output
+    return html

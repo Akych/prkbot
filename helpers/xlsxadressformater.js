@@ -20,3 +20,13 @@ module.exports.addressToNumber = (index) => {
   const row = parseInt(number, 10);
   return { col : column, row : row };
 }
+
+
+module.exports.addToStringAddress = (address,add = [0,0]) => {
+  const row = add[0]
+  const col = add[1]
+  var cur_address = module.exports.addressToNumber(address)
+  cur_address.row+=row
+  cur_address.col+=col
+  return module.exports.numberToAddress(cur_address.row,cur_address.col)
+}
