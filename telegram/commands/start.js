@@ -9,7 +9,7 @@ module.exports = {
                 inline_keyboard:[
                     [
                         { text: 'Группы', callback_data: 'redirect:groups' },
-                        { text: 'Преподаватели(no work)', callback_data: 'redirect:peoples' },
+                        { text: 'Преподаватели', callback_data: 'redirect:peoples' },
                       //  { text: 'Кабинеты(no work)', callback_data: 'redirect:rooms' }
                     ]
                   // [

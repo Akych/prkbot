@@ -7,7 +7,7 @@ module.exports = {
 
           const buttons = generateInlineKeyboardButtons("peoples",storage.get("people"),3)
           buttons.push(                    [
-            { text: 'Кабинеты', callback_data: 'redirect:roms' },
+            { text: 'Кабинеты(not work)', callback_data: 'redirect:roms' },
           ])
           buttons.push(                    [
               { text: 'Назад', callback_data: 'redirect:start' },

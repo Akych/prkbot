@@ -5,6 +5,7 @@ const { Bot, InputFile } = require("grammy");
 const {telegramm} = require("../cfg.json")
 const fs = require('fs');
 const botToken = telegramm.token;
+
 const bot = new Bot(botToken);
 const commandscache = {}
 function registerCommands() {
@@ -14,7 +15,9 @@ function registerCommands() {
         const commandName = file.split('.')[0];
         const commandData = require(`./commands/${file}`);
         commandscache[commandName] = commandData
-        commands.push({ command: commandName, description: commandData.desc })
+        if(!commandData.admin){
+            commands.push({ command: commandName, description: commandData.desc })
+        }
         bot.command(commandName, (ctx) => {
             commandData.callback(ctx)
         });
@@ -22,9 +25,11 @@ function registerCommands() {
         
     bot.on("callback_query:data", async (ctx) => {
         const data = ctx.callbackQuery.data
+        var userID = ctx.callbackQuery.from.id
         if (data.startsWith('groups:')) {
             const group = data.split(':')[1];
-            var userID = ctx.callbackQuery.from.id
+            
+            const message = await ctx.reply(`Обрабатываем ваш запрос... (Расписание ${group})`);
             tasker.add({
                 userid : userID,
                 func : async ()=>{
@@ -34,6 +39,7 @@ function registerCommands() {
                         media: new InputFile(fileName),
                     }));
                     mediaGroup[mediaGroup.length-1].caption = `Расписание для ${group}`
+                    await ctx.api.deleteMessage(ctx.chat.id, message.message_id);
                     await ctx.replyWithMediaGroup(mediaGroup)
                 }
             })
@@ -41,7 +47,7 @@ function registerCommands() {
 
         if (data.startsWith('peoples:')) {
             const people = data.split(':')[1];
-            var userID = ctx.callbackQuery.from.id
+            const message = await ctx.reply(`Обрабатываем ваш запрос... (Расписание ${people})`);
             tasker.add({
                 userid : userID,
                 func : async ()=>{
@@ -50,12 +56,13 @@ function registerCommands() {
                         type: 'photo',
                         media: new InputFile(fileName),
                     }));
+                    
                     mediaGroup[mediaGroup.length-1].caption = `Расписание для ${people}` 
+                    await ctx.api.deleteMessage(ctx.chat.id, message.message_id);
                     await ctx.replyWithMediaGroup(mediaGroup)
                 }
             })
         }
-
 
         if (data.startsWith('redirect:')) {
             const command = data.split(':')[1];
@@ -70,6 +77,16 @@ function registerCommands() {
         }
     });
     bot.api.setMyCommands(commands);
+
+    bot.on("message", async (ctx) => {
+        const userID = ctx.update.message.from.id; // the message object
+        if(!telegramm.admins[userID]) return;
+        const text = ctx.update.message.text
+        if(text == "/clean"){
+            ctx.reply("Чет тут я хотел сделать для управления")
+        }
+    });
+
 }
 
 function startBot() {

@@ -1,7 +1,8 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const fs = require('fs');
-const { vk } = require("../cfg.json")
+const { vk } = require("../cfg.json");
+const { fileURLToPath } = require('url');
 
 const axiosConfig = {
   headers: {
@@ -60,7 +61,9 @@ const downloadFile = async (url) => {
   response.data.pipe(fs.createWriteStream(vk.schedule.savefilepathandname));
   return new Promise((resolve, reject) => {
     response.data.on('end', () => {
+
       resolve(vk.schedule.savefilepathandname);// kek 
+      fs.writeFileSync("./files/schedulehash.txt",url)
     });
     response.data.on('error', (err) => {
       reject(err);
@@ -69,6 +72,23 @@ const downloadFile = async (url) => {
 }
 
 module.exports.getScheduleLink = getScheduleLink
+
+
+module.exports.idle = async (cb) =>{
+  setInterval(async () => {
+      const link = await getScheduleLink()
+      if (!fs.existsSync("./files/schedulehash.txt")){
+        fs.writeFileSync("./files/schedulehash.txt","")
+      }
+      const hash = fs.readFileSync("./files/schedulehash.txt",'utf8')
+      if(hash!==link){
+        fs.writeFileSync("./files/schedulehash.txt",link)
+        await cb(link)
+      }
+
+  }, 10000);
+}
+
 module.exports.run = async () =>{
   return new Promise(async (resolve, reject) => {
     const link = await getScheduleLink()

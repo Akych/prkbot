@@ -1,5 +1,4 @@
 {
-    
     "dynamicTimeTable" : false,
     "vk" : {
         "requestdelay" : 10,
@@ -14,11 +13,12 @@
             "hashfilepath" : "./files/hash.txt"
         }
     },
-
     "telegramm":{
-        "token" : ""
+        "token" : "6985227757:AAFi80fVi9rV8FuVmmN2oB7UKjbpLs3BuQo",
+        "admins":{
+            "873470452":true
+        }
     },
-
     "excel" : {   
         "parcer":{
             "inpoint":"Группа"
