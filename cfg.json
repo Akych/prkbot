@@ -1,28 +1,32 @@
 {
-    "dynamicTimeTable" : false,
+
     "vk" : {
-        "requestdelay" : 10,
-        "userAgent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36",
+        "requestdelay" : 60,
+        "userAgent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 YaBrowser/24.1.0.0 Safari/537.36",
         "validuserids" : {
             "6222960" : true,
             "51251854" : true
         },
         "schedule" : {
-            "url" : "https://vk.com/topic-1014995_49418124",
-            "savefilepathandname" : "./files/schedule.xlsx",
-            "hashfilepath" : "./files/hash.txt"
+            "url" : "https://vk.com/topic-1014995_49418124"
         }
     },
     "telegramm":{
-        "token" : "",
+        "token" : "<API_TOKEN>",
         "admins":{
-            "873470452":true
+            "873470452":true,
+            "532537229":true
+        },
+        "emoji":{
+            "groups": "🎓",
+            "people": "💼",
+            "automatization": "⚙️",
+            "subs":"📫",
+            "getsubs":"📩",
+            "close" : "❌"
         }
     },
     "excel" : {   
-        "parcer":{
-            "inpoint":"Группа"
-        },
         "emptyellstyle" : {
             "value": "",
             "fill": {
@@ -32,8 +36,6 @@
             "bgColor": { "argb": "FF000000" }
             }
         }
-
-
     }
 
 }

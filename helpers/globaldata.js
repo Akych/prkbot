@@ -6,9 +6,11 @@ class Storage {
     init(id){
         this.data[id] = []
     }
+
     get(id){
         return this.data[id]
     }
+
     set(id,data){
         this.data[id] = data
     }

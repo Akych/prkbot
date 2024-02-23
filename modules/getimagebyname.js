@@ -19,8 +19,6 @@ const telegrammRequest = async (name,dirname = "")=>{
           console.error('Ошибка чтения директории:', err);
           return;
         }
-
-        console.log(path2element)
         const jpegfiles = files.filter(file => path.extname(file) === ".jpeg");
         const xlsxfiles = files.filter(file => path.extname(file) === ".xlsx");
         try {
@@ -28,7 +26,12 @@ const telegrammRequest = async (name,dirname = "")=>{
                 var files = []
                 for (let index = 0; index < xlsxfiles.length; index++) {
                     const file = xlsxfiles[index];
-                    const path2html = await excel2html(path2element+"/"+file,path2element+"/"+(index+1)+".html")
+                    var path2html = await excel2html(path2element+"/"+file,path2element+"/"+(index+1)+".html")
+                   //path2html+= `<style>
+                   //html, body,table {
+                   //    white-space: nowrap
+                   //}   
+                   //</style> `
                     const path2image = await html2image(path2html,path2element+"/"+(index+1)+".jpeg")
                     files.push((index+1)+".jpeg")
                 }

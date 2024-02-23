@@ -59,15 +59,21 @@ class excelParser {
         })
         return cells
     }
-
-    copyRange2Address = async (range,toaddress,options = {unmerge:false}) => {
+    // toaddress считает на row+1 и col+1 это неправильно!!! к сожалению на такой ошибке я построил всю логику))) УДАЧИ!
+    copyRange2Address = async (range,toaddress,options = {nomerge:false,unmerge:false,toadress:null}) => {
 
         var sourceSheet = this.getSourceSheet()
         var targetSheet = this.getTargetSheet()
 
         if(!sourceSheet||!targetSheet){err("Невозможно выполнить excelParser.moveRange2Address отсутствует excelParser.sourceSheet или excelParser.targetSheet вызовите excelParser.createExcel для устранения проблемы.");return}
 
-        const offset = toaddress ? addressToNumber(toaddress[0]) : {col:0,row:0} 
+
+        var offset = toaddress ? addressToNumber(toaddress[0]) : {col:0,row:0} 
+
+        if (options && options.toadress){
+            offset = options.toadress // можно задать адресс вручную... 
+        }
+
         const point1Data = addressToNumber(range[0])
         const point2Data = addressToNumber(range[1])
 
@@ -114,6 +120,9 @@ class excelParser {
             targetCell.numFmt = pastecell.numFmt;
             targetCell.alignment = Object.assign({}, pastecell.alignment);
             targetCell.font = Object.assign({}, pastecell.font);
+
+            targetCell.font.size+=5
+
             targetCell.border = Object.assign({}, pastecell.border);
         
             targetRow.height = sourceRow.height;
@@ -121,26 +130,29 @@ class excelParser {
 
           }
         }
-        for (const targetCellAddress in excelranges) {
-            if (excelranges.hasOwnProperty(targetCellAddress)) {
-                const sourceCellAddress = excelranges[targetCellAddress];
-  
-                const sourceCellAddressData = addressToNumber(sourceCellAddress)
-                const targetCellAddressData = addressToNumber(targetCellAddress)
-  
-                sourceCellAddressData.row+=offset.row
-                sourceCellAddressData.col+=offset.col
-  
-                targetCellAddressData.row+=offset.row
-                targetCellAddressData.col+=offset.col
-                //numberToAddress(sourceCellAddressData.row,sourceCellAddressData.col)
-                //numberToAddress(targetCellAddressData.row,targetCellAddressData.col)
 
-                if(options && options.unmerge){
-                    targetSheet.unMergeCells(`${numberToAddress(sourceCellAddressData.row,sourceCellAddressData.col)}:${numberToAddress(targetCellAddressData.row,targetCellAddressData.col)}`);
+        if(!options.nomerge){
+            for (const targetCellAddress in excelranges) {
+                if (excelranges.hasOwnProperty(targetCellAddress)) {
+                    const sourceCellAddress = excelranges[targetCellAddress];
+    
+                    const sourceCellAddressData = addressToNumber(sourceCellAddress)
+                    const targetCellAddressData = addressToNumber(targetCellAddress)
+    
+                    sourceCellAddressData.row+=offset.row
+                    sourceCellAddressData.col+=offset.col
+    
+                    targetCellAddressData.row+=offset.row
+                    targetCellAddressData.col+=offset.col
+                    //numberToAddress(sourceCellAddressData.row,sourceCellAddressData.col)
+                    //numberToAddress(targetCellAddressData.row,targetCellAddressData.col)
+
+                    if(options && options.unmerge){
+                        targetSheet.unMergeCells(`${numberToAddress(sourceCellAddressData.row,sourceCellAddressData.col)}:${numberToAddress(targetCellAddressData.row,targetCellAddressData.col)}`);
+                    }
+
+                    targetSheet.mergeCells(`${numberToAddress(sourceCellAddressData.row,sourceCellAddressData.col)}:${numberToAddress(targetCellAddressData.row,targetCellAddressData.col)}`);
                 }
-
-                targetSheet.mergeCells(`${numberToAddress(sourceCellAddressData.row,sourceCellAddressData.col)}:${numberToAddress(targetCellAddressData.row,targetCellAddressData.col)}`);
             }
         }
     }

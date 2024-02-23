@@ -1,21 +1,36 @@
 const storage = require("../../helpers/globaldata.js")
+const getuserid = require("../helpers/getuserid.js")
 const { generateInlineKeyboardButtons } = require("../helpers/buttonFormater.js")
-
+const {telegramm} = require("../../cfg.json")
 module.exports = {
     desc : "Начать работу с ботом",
     callback:async (ctx)=>{
-          await ctx.reply("Добро пожаловать в генератор расписания.", {
+        
+        const userid = getuserid(ctx)
+    
+        const buttons = [
+            [
+                { text: `${telegramm.emoji.groups} Группы`, callback_data: 'redirect:groups' },
+                { text: `${telegramm.emoji.people} Преподаватели`, callback_data: 'redirect:peoples' },
+            ],
+            [
+                { text: `${telegramm.emoji.getsubs} Запросить мои подписки`, callback_data: 'func:getsubscribes' },
+                { text: `${telegramm.emoji.subs} Подписки`, callback_data: 'redirect:automatization' },
+            ],
+        ]
+
+        const endbuttons = [
+            { text: `${telegramm.emoji.close} Закрыть`, callback_data: 'func:closemenu' }, 
+        ]
+        if(telegramm.admins[userid]){
+            endbuttons.push({ text: '⚠️ Admin', callback_data: 'func:adminmenu' })
+        }
+        // ⚠️В данный момент бот в режиме разработки и может не отвечать на ваши запросы.\n\n
+        buttons.push(endbuttons)
+          await ctx.reply(`Добро пожаловать в генератор расписания.\n\n<b>${storage.get("vk_comment")}</b>\n\nОбновлено:\n<code>${storage.get("vk_lastupdate")}</code>\nСсылка на расписание: <a href="${storage.get("vk_url")}">Excel</a>`, {
+            parse_mode: 'HTML',
             reply_markup: {
-                inline_keyboard:[
-                    [
-                        { text: 'Группы', callback_data: 'redirect:groups' },
-                        { text: 'Преподаватели', callback_data: 'redirect:peoples' },
-                      //  { text: 'Кабинеты(no work)', callback_data: 'redirect:rooms' }
-                    ]
-                  // [
-                  //     { text: 'Автоматизация(no work)', callback_data: 'redirect:automatization' },
-                  // ],
-                ],
+                inline_keyboard:buttons,
             },
         });
     }

@@ -21,14 +21,15 @@ const { exec } = require('child_process');
 module.exports = async (xlsxfilepath,outfile)=>{
     return new Promise((resolve, reject) => {
         const pythonScriptPath = __dirname+"/python/run_xlsx2html.py";
+        console.log(`'${xlsxfilepath}' '${outfile}'`)
         const command = `python3 '${pythonScriptPath}' '${xlsxfilepath}' '${outfile}'`;
-        console.log(command)
-        exec(command, (error, stdout, stderr) => {
+        exec(command,{maxBuffer: 1024 * 1024 * 64}, (error, stdout, stderr) => {
         if (error) {
             console.error(`Ошибка выполнения скрипта: ${error}`);
             return;
         }
-            resolve(stdout)
+        resolve(stdout)
+        
         });
     })
 }
