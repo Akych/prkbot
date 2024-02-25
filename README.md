@@ -19,4 +19,4 @@
 ### Атоматический запуск/перезапуск
 
 Установите PM2 - https://pm2.io/docs/runtime/guide/installation/
-После в корневой папки проекта введите `pm2 start . --name prkbot` и `pm2 save`
+После, в корневой папке проекта введите `pm2 start . --name prkbot` и `pm2 save`
