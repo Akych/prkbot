@@ -41,7 +41,7 @@ module.exports = {
                 func : async ()=>{
                   ctx : ctx,
                   incrementer+=1
-                  console.log(incrementer>=subs.length,incrementer,Object.keys(subs).length)
+                  //console.log(incrementer>=subs.length,incrementer,Object.keys(subs).length)
                     const images = await getimages(item_name,"/"+key)
                     const mediaGroup = images.map((fileName) => ({
                         type: 'photo',
@@ -49,7 +49,7 @@ module.exports = {
                     }));
                     mediaGroup[mediaGroup.length-1].caption = `Расписание для ${item_name}`
                     await ctx.replyWithMediaGroup(mediaGroup)
-                    console.log(incrementer,Object.keys(subs).length)
+                   // console.log(incrementer,Object.keys(subs).length)
                     if(incrementer>=Object.keys(subs).length){
                        startcmd.callback(ctx)
                     }

@@ -13,7 +13,7 @@ fs.readdir(path.join(__dirname, '..', 'files', 'temp', 'cources'), (err, files) 
   files.forEach(file => {
     if (path.extname(file) === '.html') {
       const fileName = path.parse(file).name;
-      console.log('/'+fileName)
+      console.log('регистрация страницы /'+fileName)
       app.get('/'+fileName, (req, res) => {
         const filePath = path.join(__dirname, '..', 'files', 'temp', 'cources', fileName+'.html');
         res.sendFile(filePath);

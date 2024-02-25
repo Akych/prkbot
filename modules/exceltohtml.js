@@ -21,7 +21,7 @@ const { exec } = require('child_process');
 module.exports = async (xlsxfilepath,outfile)=>{
     return new Promise((resolve, reject) => {
         const pythonScriptPath = __dirname+"/python/run_xlsx2html.py";
-        console.log(`'${xlsxfilepath}' '${outfile}'`)
+        //console.log(`'${xlsxfilepath}' '${outfile}'`)
         const command = `python3 '${pythonScriptPath}' '${xlsxfilepath}' '${outfile}'`;
         exec(command,{maxBuffer: 1024 * 1024 * 64}, (error, stdout, stderr) => {
         if (error) {

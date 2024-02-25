@@ -9,7 +9,7 @@ const telegrammRequest = async (name,dirname = "")=>{
 
     return new Promise((resolve, reject) => {
     const path2element = tempdir+dirname+"/"+name
-    console.log(path2element)
+    //console.log(path2element)
     if(!fs.existsSync(path2element)){ 
         return;
     }

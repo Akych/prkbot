@@ -8,7 +8,7 @@ class queue {
     }
 
     add(task){
-        console.log("add task ",task)
+       // console.log("add task ",task)
         if(task.userid){
             //if(this.userHasBan(task.userid)){ // Это должно быть перед .add дабы можно было нескеолько задач закинуть
             //    return false
@@ -35,7 +35,7 @@ class queue {
     async #worker(){
         if(this.#count()>0){
             const task = this.#get()
-            console.log("work task ",task)
+           // console.log("work task ",task)
             clearTimeout(this.timers["skiptaskifbug"])
             this.timers["skiptaskifbug"] = setTimeout(() => {
                 this.#worker(); 
