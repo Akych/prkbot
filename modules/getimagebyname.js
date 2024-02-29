@@ -5,7 +5,7 @@ const excel2html = require("./exceltohtml.js")
 const html2image = require("./htmltoimage.js")
 
 const tempdir = "./files/temp"
-const telegrammRequest = async (name,dirname = "")=>{
+const telegramRequest = async (name,dirname = "")=>{
 
     return new Promise((resolve, reject) => {
     const path2element = tempdir+dirname+"/"+name
@@ -50,4 +50,4 @@ const telegrammRequest = async (name,dirname = "")=>{
 }
 
 
-module.exports = telegrammRequest
+module.exports = telegramRequest

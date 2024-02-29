@@ -5,8 +5,8 @@ const html2image = require("./htmltoimage.js")
 const getimagebyname = require("./getimagebyname.js")
 const excelParser = require("./excelparser.js")
 const storage = require("../helpers/globaldata.js")
-storage.init("telegramm_stop")
-storage.set("telegramm_stop",true)
+storage.init("telegram_stop")
+storage.set("telegram_stop",true)
 
 
 const fs = require("fs")
@@ -27,7 +27,7 @@ module.exports.run = async ()=>{
         storage.init("people")
         storage.init("rooms")
         storage.init("empty_rooms")
-        storage.set("telegramm_stop",true)
+        storage.set("telegram_stop",true)
 
         const mainWorkBook = new ExcelJS.Workbook();
         console.log("Загружаем основную таблицу")
@@ -577,7 +577,7 @@ module.exports.run = async ()=>{
 
 
 
-            storage.set("telegramm_stop",false)
+            storage.set("telegram_stop",false)
             console.log("Генерация Excel завершена ",new Date().getTime() / 1000 - startgenerator,"sec")
             resolve()
             //await schedule.newExcel()

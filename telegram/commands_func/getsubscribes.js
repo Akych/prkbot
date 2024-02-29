@@ -2,7 +2,7 @@ const tasker = require("../requestqueue.js")
 const getuserid = require("../helpers/getuserid.js")
 const db = require("../../database/db.js")
 const getimages = require("../../modules/getimagebyname.js")
-const {telegramm} = require("../../cfg.json")
+const {telegram} = require("../../cfg.json")
 const { InputFile } = require("grammy");
 const startcmd = require("../commands/start.js")
 
@@ -20,7 +20,7 @@ module.exports = {
             buttons.push(                    [
                 { text: 'Ок', callback_data: 'redirect:start' },
             ])
-            await ctx.reply(`У вас нет активных подписок! Перейдите в раздел ${telegramm.emoji.subs} Подписки и настройте!`, {
+            await ctx.reply(`У вас нет активных подписок! Перейдите в раздел ${telegram.emoji.subs} Подписки и настройте!`, {
                 reply_markup: {
                   inline_keyboard: buttons,
                 },

@@ -1,5 +1,5 @@
 
-const {telegramm} = require("../../cfg.json")
+const {telegram} = require("../../cfg.json")
 const settings = require("../../settings.js")
 
 const adminmenu = require(`../commands_func/adminmenu.js`);
@@ -16,7 +16,7 @@ module.exports = {
     func:async (ctx)=>{
         console.log(ctx.update.callback_query)
         const userid = ctx.update.callback_query.from.id
-        if(!telegramm.admins[userid]) return
+        if(!telegram.admins[userid]) return
         var cur_mode = settings.get("deliverymode","all")
         var index = modes[cur_mode]
         index += 1
