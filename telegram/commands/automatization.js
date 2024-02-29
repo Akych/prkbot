@@ -1,4 +1,4 @@
-const {telegramm} = require("../../cfg.json")
+const {telegram} = require("../../cfg.json")
 
 const getuserid = require("../helpers/getuserid.js")
 const db = require("../../database/db.js")
@@ -18,15 +18,15 @@ module.exports = {
        }
 
         buttons.push(                    [
-            { text: `${telegramm.emoji.groups} Группы ${subscribes.groups ? " | "+subscribes.groups : ""}`, callback_data: 'func:automatization:groups' },
+            { text: `${telegram.emoji.groups} Группы ${subscribes.groups ? " | "+subscribes.groups : ""}`, callback_data: 'func:automatization:groups' },
         ])
 
         buttons.push(                    [
-          { text: `${telegramm.emoji.people} Преподаватели ${subscribes.people ? " | "+subscribes.people : ""}`, callback_data: 'func:automatization:people' },
+          { text: `${telegram.emoji.people} Преподаватели ${subscribes.people ? " | "+subscribes.people : ""}`, callback_data: 'func:automatization:people' },
         ])
 
        //buttons.push(                    [
-       //  { text: `${telegramm.emoji.people} Преподаватели ${subscribes.people ? " | "+subscribes.people : ""}`, callback_data: 'func:automatization:people' },
+       //  { text: `${telegram.emoji.people} Преподаватели ${subscribes.people ? " | "+subscribes.people : ""}`, callback_data: 'func:automatization:people' },
        //])
 
         buttons.push(                    [

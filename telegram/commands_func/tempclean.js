@@ -1,13 +1,13 @@
 
 const temcleaner = require("../../helpers/tempcleaner.js")
-const {telegramm} = require("../../cfg.json")
+const {telegram} = require("../../cfg.json")
 const editor = require("../../modules/exceleditor.js")
 
 module.exports = {
     func:async (ctx)=>{
         console.log(ctx.update.callback_query)
         const userid = ctx.update.callback_query.from.id
-        if(!telegramm.admins[userid]) return
+        if(!telegram.admins[userid]) return
 
         await temcleaner.run()
         await ctx.reply("Admin: КЕШ удален.")

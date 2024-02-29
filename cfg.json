@@ -11,7 +11,7 @@
             "url" : "https://vk.com/topic-1014995_49418124"
         }
     },
-    "telegramm":{
+    "telegram":{
         "token" : "<API_TOKEN>",
         "admins":{
             "873470452":true,

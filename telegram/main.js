@@ -3,9 +3,9 @@ const storage = require("../helpers/globaldata.js")
 const getimages = require("../modules/getimagebyname.js")
 const tasker = require("./requestqueue.js")
 const { Bot, InputFile,Markup } = require("grammy");
-const {telegramm} = require("../cfg.json")
+const {telegram} = require("../cfg.json")
 const fs = require('fs');
-const botToken = telegramm.token;
+const botToken = telegram.token;
 
 
 
@@ -36,7 +36,7 @@ function registerCommands() {
     }
 
     bot.on("callback_query:data", async (ctx) => {
-        if(storage.get("telegramm_stop")){
+        if(storage.get("telegram_stop")){
             await ctx.reply(`Генерируем данные! Ваш запрос не может быть обработан!\n\nПопробуйте снова через 30 секунд.`);
             return
         } 
@@ -135,7 +135,7 @@ function registerCommands() {
 
         
         //if(text == "/clean"){
-        //    if(!telegramm.admins[userID]) return;
+        //    if(!telegram.admins[userID]) return;
         //    
         //}
 

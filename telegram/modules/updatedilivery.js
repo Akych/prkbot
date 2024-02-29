@@ -3,7 +3,7 @@ const storage = require("../../helpers/globaldata.js");
 const tasker = require("../requestqueue.js")
 
 const getimages = require("../../modules/getimagebyname.js")
-const {telegramm} = require("../../cfg.json")
+const {telegram} = require("../../cfg.json")
 const { Bot,InputFile } = require("grammy");
 
 const settings = require("../../settings.js")
@@ -53,7 +53,7 @@ worker = async ()=>{
     if (mode == "off") return
 
     const user = await getUsersWithMail();
-    if(!user || !user[0] || storage.get("telegramm_stop")){
+    if(!user || !user[0] || storage.get("telegram_stop")){
         console.log("stop dileviry")
         return
     }
@@ -63,7 +63,7 @@ worker = async ()=>{
     var send = true
 
     if (mode == "admins"){
-        send = telegramm.admins[userID]
+        send = telegram.admins[userID]
     }
 
     if (send){

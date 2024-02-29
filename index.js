@@ -10,7 +10,7 @@ const db = require("./database/db.js")
 // выполнить при запуске
 loader.run().then(async ()=>{
     await exceleditor.run()
-    const telegramm = require("./telegram/main.js")
+    const telegram = require("./telegram/main.js")
     const tv = require("./tv/express.js")
 })
 

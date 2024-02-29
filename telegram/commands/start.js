@@ -1,7 +1,7 @@
 const storage = require("../../helpers/globaldata.js")
 const getuserid = require("../helpers/getuserid.js")
 const { generateInlineKeyboardButtons } = require("../helpers/buttonFormater.js")
-const {telegramm} = require("../../cfg.json")
+const {telegram} = require("../../cfg.json")
 module.exports = {
     desc : "Начать работу с ботом",
     callback:async (ctx)=>{
@@ -10,19 +10,19 @@ module.exports = {
     
         const buttons = [
             [
-                { text: `${telegramm.emoji.groups} Группы`, callback_data: 'redirect:groups' },
-                { text: `${telegramm.emoji.people} Преподаватели`, callback_data: 'redirect:peoples' },
+                { text: `${telegram.emoji.groups} Группы`, callback_data: 'redirect:groups' },
+                { text: `${telegram.emoji.people} Преподаватели`, callback_data: 'redirect:peoples' },
             ],
             [
-                { text: `${telegramm.emoji.getsubs} Запросить мои подписки`, callback_data: 'func:getsubscribes' },
-                { text: `${telegramm.emoji.subs} Подписки`, callback_data: 'redirect:automatization' },
+                { text: `${telegram.emoji.getsubs} Запросить мои подписки`, callback_data: 'func:getsubscribes' },
+                { text: `${telegram.emoji.subs} Подписки`, callback_data: 'redirect:automatization' },
             ],
         ]
 
         const endbuttons = [
-            { text: `${telegramm.emoji.close} Закрыть`, callback_data: 'func:closemenu' }, 
+            { text: `${telegram.emoji.close} Закрыть`, callback_data: 'func:closemenu' }, 
         ]
-        if(telegramm.admins[userid]){
+        if(telegram.admins[userid]){
             endbuttons.push({ text: '⚠️ Admin', callback_data: 'func:adminmenu' })
         }
         // ⚠️В данный момент бот в режиме разработки и может не отвечать на ваши запросы.\n\n

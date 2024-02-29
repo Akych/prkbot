@@ -1,4 +1,4 @@
-const {telegramm} = require("../../cfg.json")
+const {telegram} = require("../../cfg.json")
 const storage = require("../../helpers/globaldata.js")
 const getuserid = require("../helpers/getuserid.js")
 const db = require("../../database/db.js")
